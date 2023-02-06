@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taskf/api/api.dart';
 import 'package:taskf/detailsPage.dart';
 import 'package:taskf/homePage.dart';
 
@@ -12,6 +13,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: HomePage());
+    return MaterialApp(
+      home: Scaffold(body: HomePage()),
+    );
   }
 }
