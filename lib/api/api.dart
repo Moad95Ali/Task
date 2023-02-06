@@ -7,17 +7,19 @@ import 'config.dart';
 import 'package:http/http.dart' as http;
 
 class Api {
-  Future<SearchCharacters?> search(int page) async {
-    Map<String, dynamic> map = {
-      'page': page.toString(),
-    };
-    var url = Uri.https(baseUrl, pathUrl, map);
+  Future<SearchCharacters> search({int page = 1, String name = ''}) async {
+    Map<String, dynamic> map = {'page': page.toString(), 'name': name};
+    var url = Uri.https(
+      baseUrl,
+      pathUrl,
+      map,
+    );
 
     var response = await http.get(url);
     if (response.statusCode == 200) {
       return SearchCharacters.fromJson(jsonDecode(response.body));
     } else {
-      return null;
+      throw response.body.toString();
     }
   }
 

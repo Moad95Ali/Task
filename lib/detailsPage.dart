@@ -4,6 +4,9 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:taskf/api/api.dart';
 import 'package:taskf/model/details.dart';
 
+import 'model/details.dart';
+import 'model/location.dart';
+
 class DetailsPage extends StatefulWidget {
   final int id;
   const DetailsPage({super.key, required this.id});
@@ -67,15 +70,17 @@ class _DetailsPageState extends State<DetailsPage> {
                           backgroundColor: Colors.black12,
                           radius: 75,
                           child: CircleAvatar(
-                            radius: 70,
-                            backgroundImage: NetworkImage(
-                                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzXDw0HLtnj9nLbhAK6zRD8ioLS3wqacr_EuN8knea&s'),
-                          ),
+                              radius: 70,
+                              backgroundImage: NetworkImage(data?.image ?? "")),
                         ),
                       ),
                       Text(
                         data?.name ?? "",
-                        style: TextStyle(color: Colors.black, fontSize: 24),
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 24,
+                          decoration: TextDecoration.none,
+                        ),
                       ),
                     ],
                   ),
@@ -94,7 +99,7 @@ class _DetailsPageState extends State<DetailsPage> {
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: const [
+                              children: [
                                 Text(
                                   'Gender',
                                   style: TextStyle(
@@ -104,7 +109,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                   ),
                                 ),
                                 Text(
-                                  'Male',
+                                  data?.gender ?? "",
                                   style: TextStyle(
                                     fontSize: 16,
                                     color: Colors.black45,
@@ -124,7 +129,7 @@ class _DetailsPageState extends State<DetailsPage> {
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: const [
+                              children: [
                                 Text(
                                   'Status',
                                   style: TextStyle(
@@ -134,7 +139,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                   ),
                                 ),
                                 Text(
-                                  'Single',
+                                  data?.status ?? "",
                                   style: TextStyle(
                                     fontSize: 16,
                                     color: Colors.black45,
@@ -154,7 +159,7 @@ class _DetailsPageState extends State<DetailsPage> {
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: const [
+                              children: [
                                 Text(
                                   'Species',
                                   style: TextStyle(
@@ -164,7 +169,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                   ),
                                 ),
                                 Text(
-                                  'Depeloper',
+                                  data?.species ?? "",
                                   style: TextStyle(
                                     fontSize: 16,
                                     color: Colors.black45,
@@ -184,7 +189,7 @@ class _DetailsPageState extends State<DetailsPage> {
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: const [
+                              children: [
                                 Text(
                                   'Date',
                                   style: TextStyle(
@@ -194,7 +199,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                   ),
                                 ),
                                 Text(
-                                  '2/10/201',
+                                  data?.created ?? "",
                                   style: TextStyle(
                                     fontSize: 16,
                                     color: Colors.black45,
@@ -214,7 +219,7 @@ class _DetailsPageState extends State<DetailsPage> {
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: const [
+                              children: [
                                 Text(
                                   'Location',
                                   style: TextStyle(
@@ -224,7 +229,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                   ),
                                 ),
                                 Text(
-                                  'US,FOL',
+                                  data?.location?.name ?? "",
                                   style: TextStyle(
                                     fontSize: 16,
                                     color: Colors.black45,
