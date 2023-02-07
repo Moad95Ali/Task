@@ -3,6 +3,8 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:taskf/api/api.dart';
 import 'package:taskf/model/details.dart';
+import 'package:taskf/model/fixtime.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'model/details.dart';
 import 'model/location.dart';
@@ -45,17 +47,15 @@ class _DetailsPageState extends State<DetailsPage> {
                 Container(
                   height: 90,
                   width: double.infinity,
-                  color: Color(0XFF593A5C),
-                  child: const Center(
-                    child: Text(
-                      'Details',
-                      style: TextStyle(
-                        fontSize: 30,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w400,
-                        decoration: TextDecoration.none,
-                      ),
-                    ),
+                  color: Color(0XFF54B534),
+                  child: Center(
+                    child: Text('Details',
+                        style: GoogleFonts.itim(
+                          fontSize: 40,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w400,
+                          decoration: TextDecoration.none,
+                        )),
                   ),
                 ),
                 Container(
@@ -74,14 +74,13 @@ class _DetailsPageState extends State<DetailsPage> {
                               backgroundImage: NetworkImage(data?.image ?? "")),
                         ),
                       ),
-                      Text(
-                        data?.name ?? "",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 24,
-                          decoration: TextDecoration.none,
-                        ),
-                      ),
+                      Text(data?.name ?? "",
+                          style: GoogleFonts.itim(
+                            fontSize: 28,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w400,
+                            decoration: TextDecoration.none,
+                          )),
                     ],
                   ),
                 ),
@@ -100,22 +99,20 @@ class _DetailsPageState extends State<DetailsPage> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  'Gender',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    color: Colors.black,
-                                    decoration: TextDecoration.none,
-                                  ),
-                                ),
-                                Text(
-                                  data?.gender ?? "",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.black45,
-                                    decoration: TextDecoration.none,
-                                  ),
-                                ),
+                                Text('Gender',
+                                    style: GoogleFonts.itim(
+                                      fontSize: 26,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w400,
+                                      decoration: TextDecoration.none,
+                                    )),
+                                Text(data?.gender ?? "",
+                                    style: GoogleFonts.itim(
+                                      fontSize: 20,
+                                      color: Colors.black45,
+                                      fontWeight: FontWeight.w300,
+                                      decoration: TextDecoration.none,
+                                    )),
                               ],
                             ),
                           )),
@@ -130,22 +127,20 @@ class _DetailsPageState extends State<DetailsPage> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  'Status',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.black,
-                                    decoration: TextDecoration.none,
-                                  ),
-                                ),
-                                Text(
-                                  data?.status ?? "",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.black45,
-                                    decoration: TextDecoration.none,
-                                  ),
-                                ),
+                                Text('Status',
+                                    style: GoogleFonts.itim(
+                                      fontSize: 26,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w400,
+                                      decoration: TextDecoration.none,
+                                    )),
+                                Text(data?.status ?? "",
+                                    style: GoogleFonts.itim(
+                                      fontSize: 20,
+                                      color: Colors.black45,
+                                      fontWeight: FontWeight.w300,
+                                      decoration: TextDecoration.none,
+                                    )),
                               ],
                             ),
                           )),
@@ -160,22 +155,20 @@ class _DetailsPageState extends State<DetailsPage> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  'Species',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.black,
-                                    decoration: TextDecoration.none,
-                                  ),
-                                ),
-                                Text(
-                                  data?.species ?? "",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.black45,
-                                    decoration: TextDecoration.none,
-                                  ),
-                                ),
+                                Text('Species',
+                                    style: GoogleFonts.itim(
+                                      fontSize: 26,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w400,
+                                      decoration: TextDecoration.none,
+                                    )),
+                                Text(data?.species ?? "",
+                                    style: GoogleFonts.itim(
+                                      fontSize: 20,
+                                      color: Colors.black45,
+                                      fontWeight: FontWeight.w300,
+                                      decoration: TextDecoration.none,
+                                    )),
                               ],
                             ),
                           )),
@@ -190,22 +183,20 @@ class _DetailsPageState extends State<DetailsPage> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  'Date',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.black,
-                                    decoration: TextDecoration.none,
-                                  ),
-                                ),
-                                Text(
-                                  data?.created ?? "",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.black45,
-                                    decoration: TextDecoration.none,
-                                  ),
-                                ),
+                                Text('Date',
+                                    style: GoogleFonts.itim(
+                                      fontSize: 26,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w400,
+                                      decoration: TextDecoration.none,
+                                    )),
+                                Text(FixTime.fixTime(data?.created ?? ""),
+                                    style: GoogleFonts.itim(
+                                      fontSize: 20,
+                                      color: Colors.black45,
+                                      fontWeight: FontWeight.w300,
+                                      decoration: TextDecoration.none,
+                                    )),
                               ],
                             ),
                           )),
@@ -220,22 +211,20 @@ class _DetailsPageState extends State<DetailsPage> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  'Location',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.black,
-                                    decoration: TextDecoration.none,
-                                  ),
-                                ),
-                                Text(
-                                  data?.location?.name ?? "",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.black45,
-                                    decoration: TextDecoration.none,
-                                  ),
-                                ),
+                                Text('Location',
+                                    style: GoogleFonts.itim(
+                                      fontSize: 26,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w400,
+                                      decoration: TextDecoration.none,
+                                    )),
+                                Text(data?.location?.name ?? "",
+                                    style: GoogleFonts.itim(
+                                      fontSize: 20,
+                                      color: Colors.black45,
+                                      fontWeight: FontWeight.w300,
+                                      decoration: TextDecoration.none,
+                                    )),
                               ],
                             ),
                           )),
