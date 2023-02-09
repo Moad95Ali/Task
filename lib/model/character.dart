@@ -14,7 +14,8 @@ class Character {
       this.species,
       this.gender,
       this.image,
-      this.created});
+      this.created,
+      required Character data});
 
   Character.fromJson(Map<String, dynamic> json) {
     id = json['id'];

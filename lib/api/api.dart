@@ -16,10 +16,13 @@ class Api {
     );
 
     var response = await http.get(url);
+    print(url);
+    print(response.body);
+
     if (response.statusCode == 200) {
       return SearchCharacters.fromJson(jsonDecode(response.body));
     } else {
-      throw response.body.toString();
+      throw Exception('Failed to load details');
     }
   }
 
@@ -41,6 +44,4 @@ class Api {
       return null;
     }
   }
-
-  
 }

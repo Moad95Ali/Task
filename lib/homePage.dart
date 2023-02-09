@@ -1,12 +1,16 @@
+import 'dart:convert';
+import 'package:flutter/foundation.dart';
+import 'package:search_page/search_page.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:taskf/detailsPage.dart';
 import 'package:http/http.dart' as http;
-  
 
 import 'api/api.dart';
+import 'api/config.dart';
 import 'characters_list_result.dart';
 import 'model/character.dart';
 import 'model/fixtime.dart';
@@ -22,6 +26,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   static const _pageSize = 20;
+  String searchName = '';
 
   final PagingController<int, Character> _pagingController =
       PagingController(firstPageKey: 0);
@@ -38,8 +43,8 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> _fetchPage(int pageKey) async {
     try {
-      final newItems = await Api().search(page: pageKey);
-      bool isLastPage = (newItems.info?.pages ?? 0) < _pageSize;
+      final newItems = await Api().search(page: pageKey, name: searchName);
+      bool isLastPage = (newItems.results?.length ?? 0) < _pageSize;
       if (isLastPage) {
         _pagingController.appendLastPage(newItems.results ?? []);
       } else {
@@ -73,12 +78,15 @@ class _HomePageState extends State<HomePage> {
         children: [
           Container(
             color: Colors.white,
+            width: double.infinity,
+            height: 60,
             child: TextField(
               textInputAction: TextInputAction.search,
               onChanged: (value) {
                 setState(() {
-                  futureSearchCharacters = Api().search(name: value);
+                  searchName = value;
                 });
+                _pagingController.refresh();
               },
               decoration: InputDecoration(
                 hintText: "Search",
@@ -89,32 +97,36 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           SizedBox(
-            height: 5,
+            height: 2,
           ),
           Expanded(
               child: FutureBuilder(
-            future: futureSearchCharacters,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator());
-              }
-              if (snapshot.hasError && snapshot.data == null) {
-                return Text(snapshot.error.toString());
-              }
-              final data = snapshot.data!;
+                  future: futureSearchCharacters,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(child: CircularProgressIndicator());
+                    }
+                    if (snapshot.hasError || snapshot.data == null) {
+                      return Center(
+                        child: Text(
+                          'no result',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      );
+                    }
+                    final data = snapshot.data;
 
-              return PagedListView<int, Character>(
-                pagingController: _pagingController,
-                builderDelegate: PagedChildBuilderDelegate<Character>(
-                  itemBuilder: (context, item, index) {
-                    return CharatersListResultWidget(
-                      data: item,
+                    return PagedListView<int, Character>(
+                      pagingController: _pagingController,
+                      builderDelegate: PagedChildBuilderDelegate<Character>(
+                        itemBuilder: (context, item, index) {
+                          return CharatersListResultWidget(
+                            data: item,
+                          );
+                        },
+                      ),
                     );
-                  },
-                ),
-              );
-            },
-          ))
+                  }))
         ],
       ),
     );
